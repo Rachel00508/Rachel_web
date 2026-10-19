@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { ContactForm } from "@/components/contact-form";
+export const metadata: Metadata = { title: "Contact" };
+export default function Contact() { return <><div className="page-banner"><div className="container"><p className="eyebrow">GET IN TOUCH</p><h1>We’d love to <em>hear from you.</em></h1><p>Questions about a fragrance or your order? Send us a note.</p></div></div><section className="container contact-grid"><div><p className="eyebrow">A PERSONAL NOTE</p><h2>Let’s talk fragrance.</h2><p>Use the form and we’ll get back to you as soon as we can. This demo stores messages in Supabase; no email notifications are configured.</p><div className="contact-line"><span>LOCATION</span><p>Online · United States</p></div><div className="contact-line"><span>RESPONSE</span><p>Demo form submission only</p></div></div><ContactForm/></section></>; }
