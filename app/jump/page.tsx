@@ -8,7 +8,7 @@ const destinations = [
   { href: "/", number: "01", title: "Home", description: "Start with the Rachel collection and our point of view." },
   { href: "/shop", number: "02", title: "Shop", description: "Browse fragrances and find a scent that feels like you." },
   { href: "/about", number: "03", title: "Our Story", description: "Discover the idea and inspiration behind Rachel Parfums." },
-  { href: "/contact", number: "04", title: "Contact", description: "Send us a note about a fragrance or your order." },
+  { href: "/contact", number: "04", title: "Contact", description: "See how to reach Rachel when our contact channel opens." },
   { href: "/cart", number: "05", title: "Bag", description: "Review the fragrances you have added to your bag." },
 ];
 

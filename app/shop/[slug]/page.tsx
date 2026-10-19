@@ -1,25 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Truck, ShieldCheck } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { ProductVisual } from "@/components/product-visual";
 import { AddToCart } from "@/components/add-to-cart";
 import { ProductCard } from "@/components/product-card";
-import { formatPrice, getProduct, getProducts } from "@/lib/supabase";
+import { catalogProducts, formatPrice, getProduct } from "@/lib/catalog";
 
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return catalogProducts.map((product) => ({ slug: product.slug }));
+}
+
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const product = await getProduct(slug);
+  const product = getProduct(slug);
   return { title: product?.name ?? "Fragrance", description: product?.description };
 }
 
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = await getProduct(slug);
+  const product = getProduct(slug);
   if (!product) notFound();
-  const related = (await getProducts()).filter(p => p.id !== product.id).slice(0, 3);
+  const related = catalogProducts.filter(p => p.id !== product.id).slice(0, 3);
   const illustrative = product.image_key.startsWith("/products/");
   const scentProfile = [...new Set([...product.notes_top, ...product.notes_heart, ...product.notes_base])];
 
@@ -36,8 +40,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
           <p className="detail-description">{product.description}</p>
           <p className="detail-price">{formatPrice(product.price_cents)} <span> / {product.size_ml} ml</span></p>
           <AddToCart productId={product.id} full />
-          <p className="detail-benefit"><Truck size={17}/> Complimentary U.S. shipping</p>
-          <p className="detail-benefit"><ShieldCheck size={17}/> Secure Stripe test checkout</p>
+          <p className="detail-benefit">Catalog preview · Online checkout is not available.</p>
           {illustrative && <p className="detail-illustration-note">Image is an original scent illustration, not the branded bottle or packaging. Confirm product details before purchase.</p>}
           <div className="notes">
             {illustrative ? <><h2>SCENT PROFILE</h2><div><span>NOTES</span><p>{scentProfile.join(" · ")}</p></div></> : <><h2>THE NOTES</h2><div><span>TOP</span><p>{product.notes_top.join(" · ")}</p></div><div><span>HEART</span><p>{product.notes_heart.join(" · ")}</p></div><div><span>BASE</span><p>{product.notes_base.join(" · ")}</p></div></>}

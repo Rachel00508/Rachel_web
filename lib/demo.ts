@@ -1,6 +1,6 @@
 import type { Product } from "@/lib/types";
 
-// Visual demo only. Checkout always checks live Supabase products.
+// Illustrative catalog entries. The static site does not accept orders.
 export const demoProducts: Product[] = [
   { id: "11111111-1111-4111-8111-111111111101", slug: "hermes-un-jardin-sur-le-nil", name: "爱马仕尼罗河花园", subtitle: "Hermès · Un Jardin sur le Nil", description: "A fresh, green and woody garden fragrance with green mango, lotus and sycamore. The image shown is an original illustration, not the actual product bottle.", notes_top: ["Green mango", "Lotus", "Sycamore"], notes_heart: [], notes_base: [], price_cents: 25000, size_ml: 50, image_key: "/products/hermes-nile.png", category: "Fresh Green", is_featured: true, is_active: true, sort_order: -4 },
   { id: "11111111-1111-4111-8111-111111111102", slug: "jo-malone-wood-sage-sea-salt", name: "祖·玛珑鼠尾草与海盐", subtitle: "Jo Malone London · Wood Sage & Sea Salt", description: "A breezy woody scent inspired by the coast, with ambrette seed, sea salt and sage. The image shown is an original illustration, not the actual product bottle.", notes_top: ["Ambrette seed", "Sea salt", "Sage"], notes_heart: [], notes_base: [], price_cents: 50000, size_ml: 100, image_key: "/products/jo-malone-sea-salt.png", category: "Woody Fresh", is_featured: true, is_active: true, sort_order: -3 },

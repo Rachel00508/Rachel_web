@@ -1,8 +1,0 @@
-"use client";
-
-import { useState, type FormEvent } from "react";
-export function ContactForm() {
-  const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
-  async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setState("sending"); const form = event.currentTarget; const data = Object.fromEntries(new FormData(form)); try { const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) }); if (!response.ok) throw new Error(); form.reset(); setState("success"); } catch { setState("error"); } }
-  return <form className="contact-form" onSubmit={submit}><div className="form-row"><label>Your name<input name="name" autoComplete="name" required maxLength={100} placeholder="Your name"/></label><label>Email address<input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="you@example.com"/></label></div><label>Subject<select name="subject" required defaultValue=""><option value="" disabled>Select a subject</option><option>Product question</option><option>Order inquiry</option><option>Other</option></select></label><label>Message<textarea name="message" rows={6} required minLength={10} maxLength={2000} placeholder="How can we help?"/></label><label className="honey">Leave this field blank<input name="website" tabIndex={-1} autoComplete="off"/></label><button className="button button-dark" type="submit" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send message"}</button><p className="form-status" role="status">{state === "success" ? "Thank you. Your message has been received." : state === "error" ? "We couldn't send your message. Please try again." : ""}</p></form>;
-}

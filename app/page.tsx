@@ -2,12 +2,10 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, Heart, Package } from "lucide-react";
 import { Bottle } from "@/components/bottle";
 import { ProductCard } from "@/components/product-card";
-import { getProducts } from "@/lib/supabase";
+import { catalogProducts } from "@/lib/catalog";
 
-export const dynamic = "force-dynamic";
-
-export default async function Home() {
-  const products = await getProducts();
+export default function Home() {
+  const products = catalogProducts;
   return <><section className="hero"><div className="container hero-grid"><div className="hero-copy"><p className="eyebrow light">THE RACHEL COLLECTION · EST. IN FEELING</p><h1>Wear what<br/><em>moves you.</em></h1><p>Modern fragrance for every version of you. Intimate, expressive, and impossible to forget.</p><Link href="/shop" className="button button-light">Explore the collection <ArrowRight size={17}/></Link><div className="hero-index">01 / 04 <span>SCENT AS SELF EXPRESSION</span></div></div><div className="hero-art"><div className="hero-art-title">AN INVITATION TO FEEL</div><Bottle variant="fleur" /></div></div></section>
   <section className="intro-band"><div className="container intro-inner"><span>YOUR STORY, IN SCENT</span><p>Some things are best left unspoken.<br/><em>Let your fragrance say the rest.</em></p><span>RACHEL PARFUMS</span></div></section>
   <section className="section container"><div className="section-heading"><div><p className="eyebrow">THE COLLECTION</p><h2>Find your signature.</h2></div><Link href="/shop" className="text-link">Shop all fragrances <ArrowRight size={17}/></Link></div><div className="product-grid">{products.filter(p => p.is_featured).slice(0, 3).map(p => <ProductCard key={p.id} product={p}/>)}</div></section>
